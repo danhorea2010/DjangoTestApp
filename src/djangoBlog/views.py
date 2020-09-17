@@ -1,9 +1,12 @@
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.shortcuts import render
 from django.template.loader import get_template
+from django.conf import settings
 
+import os
 from .forms import ContactForm
 from blog.models import BlogPost
+
 
 def home_page(request):
 
@@ -24,6 +27,15 @@ def home_page(request):
 def about_page(request):
     return render(request, "about.html", {"title" : "About us"})
 
+def download_page(request, path):
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    print("File Path: " + file_path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read())
+            response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
+            return response
+    return Http404
 
 def contact_page(request):
 

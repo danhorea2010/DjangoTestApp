@@ -42,6 +42,8 @@ class BlogPost(models.Model):
     time_stamp   = models.DateTimeField(auto_now_add=True)
     updated      = models.DateTimeField(auto_now=True)
 
+    fileDownload = models.FileField(null=True, blank=True)
+
     objects = BlogPostManager()
 
     class Meta:
@@ -55,3 +57,13 @@ class BlogPost(models.Model):
 
     def get_delete_url(self):
         return self.get_absolute_url() + "/delete"
+
+    def get_download_url(self):
+
+        if self.fileDownload:
+            fileName = self.fileDownload.path.split('\\')
+            fileName = fileName[-1]
+            print("FILENAME: " + fileName)
+            return fileName
+        else:
+            return None

@@ -31,10 +31,12 @@ from .views import (
     home_page,
     contact_page,
     about_page,
+    download_page,
 )
 
 urlpatterns = [
     path('', home_page),
+    path('blog/download/<str:path>', download_page),
     path('about/', about_page),
     path('search/', search_view),
     path('blog-new/', blog_post_create_view),

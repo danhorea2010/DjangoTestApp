@@ -9,9 +9,9 @@
 {% if request.user.is_authenticated %}
     {% if request.user.is_staff %}
     <div class='col-12'>
-        <a href='{{ object.get_edit_url }}'>Edit</a>
-        <a href='{{ object.get_delete_url }}'>Delete</a>
-        <a href='/blog'>Back</a>
+        <a class='badge badge-primary' href='{{ object.get_edit_url }}'>Edit</a>
+        <a class='badge badge-danger' href='{{ object.get_delete_url }}'>Delete</a>
+        <a class='badge badge-primary' href='/blog'>Back</a>
     </div>
     {% endif %}
 {% endif %}
