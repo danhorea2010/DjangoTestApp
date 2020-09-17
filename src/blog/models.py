@@ -63,7 +63,6 @@ class BlogPost(models.Model):
         if self.fileDownload:
             fileName = self.fileDownload.path.split('\\')
             fileName = fileName[-1]
-            print("FILENAME: " + fileName)
             return fileName
         else:
             return None
