@@ -1,38 +1,48 @@
+
+<style>
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+
+}
+</style>
+
 <div class='col-sm col-sm-10 mb-3 mx-auto'>
     <div class='card {% if not blog_post.publish_date %} bg-dark text-light{% endif %}'>
-        <div class='card-body'>
-            {% if blog_post.image %}
-            <a href='{{ blog_post.get_absolute_url }}'>
-                <img src="{{ blog_post.image.url }}" class='card-img-top rounded'></img>
-            </a>
-            {% endif %}
-            <h5 class='card-title'>
-                {{ blog_post.title }}
-            </h5>
-            <p class='card-text'>
-
-                {% if blog_post.publish_date %}
-                    <small class='text-muted'>{{ blog_post.publish_date }}</small>
-                {% else %}
-                    <small class='text-muted'>No publish date</small>
-
+            <div class='card-body'>
+                {% if blog_post.image %}
+                <a href='{{ blog_post.get_absolute_url }}'>
+                    <img src="{{ blog_post.image.url }}" class='card-img-top rounded'></img>
+                </a>
                 {% endif %}
+                <h5 class='card-title'>
+                    {{ blog_post.title }}
+                </h5>
+                <p class='card-text'>
+
+                    {% if blog_post.publish_date %}
+                        <small class='text-muted'>{{ blog_post.publish_date }}</small>
+                    {% else %}
+                        <small class='text-muted'>No publish date</small>
+
+                    {% endif %}
+                    
+                    {% if truncate %}
+                        {{ blog_post.content|linebreaks|truncatewords:30 }}
+                    {% else %}
+                        {{ blog_post.content|linebreaks}}
+                    {% endif %}
+                </p>
                 
-                {% if truncate %}
-                    {{ blog_post.content|linebreaks|truncatewords:30 }}
-                {% else %}
-                    {{ blog_post.content|linebreaks}}
+                {% if blog_post.fileDownload %}
+                    <a href='download/{{ blog_post.get_download_url }}'>Download Code</a>
                 {% endif %}
-            </p>
-            
-            {% if blog_post.fileDownload %}
-                <a href='download/{{ blog_post.get_download_url }}'>Download Code</a>
-            {% endif %}
 
-            {% if not detail %}
-                {% if not blog_post.publish_date %} Draft {% endif %}
-                <a href='{{ blog_post.get_absolute_url }}'>View</a>
-            {% endif %}
-        </div>
+                {% if not detail %}
+                    {% if not blog_post.publish_date %} Draft {% endif %}
+                    <a href='{{ blog_post.get_absolute_url }}'>View</a>
+                {% endif %}
+            </div>
     </div>
 </div>

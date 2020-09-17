@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.db.models import Q
 
 # Create your models here.
+import os
 
 User = settings.AUTH_USER_MODEL
 
@@ -61,8 +62,8 @@ class BlogPost(models.Model):
     def get_download_url(self):
 
         if self.fileDownload:
-            fileName = self.fileDownload.path.split('\\')
-            fileName = fileName[-1]
+            #fileName = os.path.split(self.fileDownload.path)[-1]
+            fileName = self.fileDownload.path.split('\\')[-1]
             return fileName
         else:
             return None
