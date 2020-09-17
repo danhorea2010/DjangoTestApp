@@ -67,3 +67,6 @@ class BlogPost(models.Model):
             return fileName
         else:
             return None
+
+    def __str__(self):
+        return f"{self.title} - {self.get_download_url()}"
